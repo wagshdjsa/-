@@ -1,0 +1,28 @@
+{
+  "name": "collab-whiteboard",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "实时协作白板 —— Vue3 + Canvas + Yjs(CRDT) + Node/Redis 信令",
+  "workspaces": [
+    "server",
+    "web"
+  ],
+  "scripts": {
+    "dev": "concurrently -n server,web -c cyan,magenta \"npm:dev:server\" \"npm:dev:web\"",
+    "dev:server": "npm run dev -w server",
+    "dev:web": "npm run dev -w web",
+    "build": "npm run build -w web",
+    "start": "npm run start -w server",
+    "bench": "node bench/bench.js",
+    "e2e": "node bench/e2e.js",
+    "dev:alt": "concurrently -n server,web -c cyan,magenta \"npm:dev:server\" \"npm:dev:web:alt\"",
+    "dev:web:alt": "cross-env WEB_PORT=5174 SERVER_PORT=1234 npm run dev -w web"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0",
+    "cross-env": "^7.0.3",
+    "puppeteer": "^25.15.0",
+    "ws": "^8.18.0"
+  }
+}
